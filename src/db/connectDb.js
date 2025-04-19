@@ -1,12 +1,12 @@
-import chalk from "chalk";
+import { ERRORS } from "../utils/constants/messages.js";
 import sequelize from "./sequelize.js";
 
 async function connectDb() {
     try {
         await sequelize.authenticate();
-        console.log(chalk.yellowBright("Connected to db!"));
+        console.log("Connected to db!");
     } catch (error) {
-        console.error(chalk.red('Unable to connect to the database:'), error);
+        console.error(ERRORS.DATABASE_ERROR);
     }
 }
 

@@ -25,10 +25,6 @@ const User = sequelize.define(
         password: {
             type: DataTypes.STRING,
             allowNull: false,
-            set(value) {
-                const hashed = bcrypt.hashSync(value, 10);
-                this.setDataValue('password', hashed);
-            }
         },
         profile_photo_url: {
             type: DataTypes.STRING,
@@ -37,6 +33,11 @@ const User = sequelize.define(
     }
 );
 
+
+User.beforeCreate('hashed-password', async(user) => {
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+});
 
 
 (async () => {
