@@ -13,7 +13,6 @@ const registerUserService = async (data) => {
 }
 
 
-
 module.exports = {
     registerUserService,
 }
